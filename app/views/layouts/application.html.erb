@@ -8,6 +8,10 @@
   <body>
     <%= render 'layouts/header'%>
     <div class="container">
+      <% flash.each do |key,val|%>
+      <div class="alert alert-<%= key %>"><%= val %> 
+      </div>
+      <% end %>
       <%= yield %>
       <%= render 'layouts/footer' %>
       <%= debug(params) if Rails.env.development? %>

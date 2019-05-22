@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
+  
+  resources :users , only:([:create])
+
   get '/signup', to: 'users#new'
+
+  post '/signup', to: 'users#create'
 
   root 'static_pages#home'
 
@@ -9,7 +14,9 @@ Rails.application.routes.draw do
 
   get '/contact',to:'static_pages#contact'
 
-  resources :users , only:([:show,:new,:create])
+  get "users/:id", to: 'users#show', as: :user
+
+  
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   
