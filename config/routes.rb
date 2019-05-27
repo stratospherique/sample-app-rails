@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+
   resources :users , only:([:create])
 
   get '/signup', to: 'users#new'
@@ -15,6 +16,12 @@ Rails.application.routes.draw do
   get '/contact',to:'static_pages#contact'
 
   get "users/:id", to: 'users#show', as: :user
+
+  get    '/login',   to: 'sessions#new'
+
+  post   '/login',   to: 'sessions#create'
+
+  delete '/logout',  to: 'sessions#destroy'
 
   
 
