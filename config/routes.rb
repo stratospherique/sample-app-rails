@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   
 
-  resources :users , only:([:create])
+  resources :users , only: [:create,:edit,:update,:show]
 
   get '/signup', to: 'users#new'
 
@@ -14,8 +14,6 @@ Rails.application.routes.draw do
   get '/about',to:'static_pages#about'
 
   get '/contact',to:'static_pages#contact'
-
-  get "users/:id", to: 'users#show', as: :user
 
   get    '/login',   to: 'sessions#new'
 
