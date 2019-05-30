@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
       flash[:success] = "Welcome #{@user.name}"
       log_in @user
       params[:session][:remember_me] == '1' ? remember(@user) : forget(@user)
-      redirect_to user_path(@user)
+      redirect_back_or user_path(@user)
     else
       flash.now[:danger] = "Wrong User Credentials!!!"
       render 'new'
