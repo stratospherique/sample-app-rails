@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   
 
-  resources :users , only: [:create,:edit,:update,:show]
+  resources :users , only: [:create,:edit,:update,:show,:destroy]
 
   get '/users', to: 'users#index'
 
