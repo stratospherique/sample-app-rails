@@ -14,7 +14,23 @@ class UsersIndexTestTest < ActionDispatch::IntegrationTest
     assert_redirected_to user_path(@user)
     get users_path
     assert_template 'users/index'
-    assert_select 'img.gravatar', count: User.count-1
-    assert_select 'a[href=?]', user_path(@other_user)
+  end
+
+  test "index including pagination" do
+    log_in_as(@user)
+    get users_path
+    assert_template 'users/index'
+    assert_select 'div.pagination'
+    User.paginate(page: 1).each do |user|
+      assert_select 'a[href=?]', user_path(user), text: user.name
+    end
+  end
+
+  test "presence of will_paginate links" do
+    log_in_as(@user)
+    get users_path
+    assert_template 'users/index'
+    assert_select 'div.pagination', count: 2
+    
   end
 end
